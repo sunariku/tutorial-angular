@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-event',
+  selector: 'app-shared-event',
   imports: [RouterLink],
   templateUrl: './event.html',
   styleUrl: './event.css',
