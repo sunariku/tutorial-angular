@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './event.css',
 })
 export class Event {
+  @Input() id: number = 0;
   @Input() picture: string = '';
   @Input() title: string = '';
   @Input() description: string = '';

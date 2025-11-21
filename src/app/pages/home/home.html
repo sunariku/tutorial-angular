@@ -90,6 +90,7 @@
               @for(i of data; track i.id) {
               <div class="col-md-4">
                 <app-shared-event
+                  [id]="i.id"
                   [picture]="i.picture"
                   [title]="i.title"
                   [description]="i.description"
