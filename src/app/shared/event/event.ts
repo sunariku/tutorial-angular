@@ -21,7 +21,7 @@ export class Event {
   onDescriptionClick(): void {
     const data: EventModel = {
       id: 7,
-      picture: 'https://picsum.photos/id/16/200/100',
+      picture: 'https://picsum.photos/id/17/200/100',
       title: 'Title 7',
       description: 'Description 7'
     };
