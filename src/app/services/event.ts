@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Event as EventModel } from '../models/event';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Event {
-  data = [
+  data: EventModel[] = [
     {
       id: 1,
       picture: 'https://picsum.photos/id/11/200/100',
@@ -35,5 +36,15 @@ export class Event {
       title: 'Title 5',
       description: 'Description 5',
     },
+    {
+      id: 6,
+      picture: 'https://picsum.photos/id/16/200/100',
+      title: 'Title 6',
+      description: 'Description 6',
+    },
   ];
+
+  addEvent(item: EventModel): void {
+    this.data.push(item);
+  }
 }
