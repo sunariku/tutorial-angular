@@ -3,22 +3,42 @@
     <h3 class="card-title">Create Event</h3>
   </div>
   <div class="card-body">
-    <form>
+    <form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
       <div class="space-y">
         <div>
-          <label class="form-label"> Title </label>
-          <input type="text" placeholder="Enter title" class="form-control" />
+          <label class="form-label required"> Title </label>
+          <input
+            type="text"
+            placeholder="Enter title"
+            class="form-control"
+            formControlName="title"
+          />
         </div>
         <div>
-          <label class="form-label"> Picture </label>
-          <input type="text" placeholder="Enter picture" class="form-control" />
+          <label class="form-label required"> Picture </label>
+          <input
+            type="text"
+            placeholder="Enter picture"
+            class="form-control"
+            formControlName="picture"
+          />
         </div>
         <div>
-          <label class="form-label"> Description </label>
-          <textarea placeholder="Enter your description" rows="6" class="form-control"></textarea>
+          <label class="form-label required"> Description </label>
+          <textarea
+            placeholder="Enter your description"
+            rows="6"
+            class="form-control"
+            formControlName="description"
+          >
+          </textarea>
         </div>
         <div>
-          <a href="#" class="btn btn-primary btn-4 w-100">
+          <button
+            type="submit"
+            class="btn btn-primary btn-4 w-100"
+            [disabled]="!createEventForm.valid"
+          >
             Submit
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +56,7 @@
               <path d="M13 18l6 -6"></path>
               <path d="M13 6l6 6"></path>
             </svg>
-          </a>
+          </button>
         </div>
       </div>
     </form>
