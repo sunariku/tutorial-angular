@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Event as EventService } from '../../../services/event';
 import { Event as EventModel } from '../../../models/event';
@@ -11,6 +11,8 @@ import { take } from 'rxjs';
   styleUrl: './create.css',
 })
 export class Create {
+  @Output() onSubmited = new EventEmitter<boolean>(false);
+
   private formBuilder = inject(FormBuilder);
   private eventService = inject(EventService);
 
@@ -34,14 +36,17 @@ export class Create {
         description,
       };
 
-      this.eventService.addEvent(data).pipe(take(1)).subscribe({
-        next: (response) => {
-          alert(response.message)
-        },
-        error: () => {
-          alert("Insert Gagal");
-        }
-      });
+      this.eventService
+        .addEvent(data)
+        .pipe(take(1))
+        .subscribe({
+          next: (response) => {
+            this.onSubmited.emit(true);
+          },
+          error: () => {
+            alert('Insert Gagal');
+          },
+        });
     }
   }
 }
