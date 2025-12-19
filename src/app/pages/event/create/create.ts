@@ -1,5 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Event as EventService } from '../../../services/event';
+import { Event as EventModel } from '../../../models/event';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -9,6 +12,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class Create {
   private formBuilder = inject(FormBuilder);
+  private eventService = inject(EventService);
 
   createEventForm = this.formBuilder.group({
     title: this.formBuilder.control('', Validators.required),
@@ -20,11 +24,24 @@ export class Create {
     if (this.createEventForm.valid) {
       const f = this.createEventForm.value;
 
-      const title = f.title;
-      const picture = f.picture;
-      const description = f.description;
+      const title = f.title!;
+      const picture = f.picture!;
+      const description = f.description!;
 
-      alert(`Title: ${title}`);
+      const data: EventModel = {
+        picture,
+        title,
+        description,
+      };
+
+      this.eventService.addEvent(data).pipe(take(1)).subscribe({
+        next: (response) => {
+          alert(response.message)
+        },
+        error: () => {
+          alert("Insert Gagal");
+        }
+      });
     }
   }
 }
